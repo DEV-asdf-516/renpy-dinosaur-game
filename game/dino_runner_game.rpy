@@ -201,7 +201,7 @@ init python:
             return False 
 
         def visit(self): # 사용하는 image 반환
-            return [self.dino.img,self.bg_img] + [obs.img for obs in self.obstacles]
+            return [self.dino.img,self.bg_img, self.cloud.img] + [obs.img for obs in self.obstacles]
 
         def render(self,width,height,st,at): # 화면에 그림
             render = renpy.Render(width,height)
