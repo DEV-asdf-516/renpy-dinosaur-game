@@ -293,6 +293,7 @@ init python:
                 
 screen start_mini_game():
     text "시작하려면 스페이스 바를 누르세요..." color "#ffffff" size 40 xalign 0.5 yalign 0.5
+    $ dino_game.__init__()
     key "K_SPACE" action Jump("dinosaur_game")
 
 
