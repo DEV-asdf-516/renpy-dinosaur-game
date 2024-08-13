@@ -81,7 +81,7 @@ init python:
         def jump(self,game_speed,dt):
             self.img = self.jump_img
             if self.is_jump:
-                self.y -= self.jump_velocity * 5.5
+                self.y -= self.jump_velocity * 3.6
                 self.jump_velocity -= 0.05 * (game_speed * dt)
             if self.jump_velocity < - self.JUMP_VEL: 
                 self.is_jump = False # 점프 종료 
@@ -266,35 +266,38 @@ init python:
             return render 
 
         def event(self,event,x,y,st): # 키 입력 처리
-            if event.type == pygame.KEYDOWN:
-                if (event.key == pygame.K_UP or event.key == pygame.K_SPACE) and not self.dino.is_jump:
-                    # 윗 방향키나 스페이스바 누르면 점프
-                    self.dino.is_down = False 
-                    self.dino.is_run = False 
-                    self.dino.is_jump = True
-                elif event.key == pygame.K_DOWN and not self.dino.is_jump:
-                    # 아래 방향키 누르면 고개숙임
-                    self.dino.is_down = True 
-                    self.dino.is_run = False 
-                    self.dino.is_jump = False
-            if event.type == pygame.KEYUP and not self.dino.is_jump: 
-                # 키 입력이 끝나면 다시 달리기 상태
-                    self.dino.is_down = False 
-                    self.dino.is_run = True 
-                    self.dino.is_jump = False
+            if not self.paused:
+                if event.type == pygame.KEYDOWN:
+                    if (event.key == pygame.K_UP or event.key == pygame.K_SPACE) and not self.dino.is_jump:
+                        # 윗 방향키나 스페이스바 누르면 점프
+                        self.dino.is_down = False 
+                        self.dino.is_run = False 
+                        self.dino.is_jump = True
+                    elif event.key == pygame.K_DOWN and not self.dino.is_jump:
+                        # 아래 방향키 누르면 고개숙임
+                        self.dino.is_down = True 
+                        self.dino.is_run = False 
+                        self.dino.is_jump = False
+                if event.type == pygame.KEYUP and not self.dino.is_jump: 
+                    # 키 입력이 끝나면 다시 달리기 상태
+                        self.dino.is_down = False 
+                        self.dino.is_run = True 
+                        self.dino.is_jump = False
             if event.type == pygame.KEYDOWN and (event.key == pygame.K_LALT or event.key == pygame.K_RALT): # ALT 일시정지
                     self.paused = not self.paused
                     renpy.redraw(self, 0.1)
             if self.game_over: # 게임 종료 시 이벤트 무시
                 raise renpy.IgnoreEvent()
-
+    
+    dino_game = DinosaurGame()
+                
 screen start_mini_game():
     text "시작하려면 스페이스 바를 누르세요..." color "#ffffff" size 40 xalign 0.5 yalign 0.5
     key "K_SPACE" action Jump("dinosaur_game")
 
 
 screen dino_runner_game():
-    add DinosaurGame()
+    add dino_game
 
 label dinosaur_game:
     scene bg
