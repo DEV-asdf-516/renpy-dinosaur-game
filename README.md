@@ -6,4 +6,4 @@
 
 ##### 🎮 SCREEN SHOT
 
-![dino](https://github.com/user-attachments/assets/85620e21-3e86-4805-88a5-d52bf49f410e)
+![dino](https://github.com/user-attachments/assets/6c510e68-f782-4c2e-88f6-42c05be53f49)
